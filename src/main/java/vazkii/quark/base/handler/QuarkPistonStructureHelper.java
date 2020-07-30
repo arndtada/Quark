@@ -1,3 +1,13 @@
+/**
+ * This class was created by <WireSegal>. It's distributed as
+ * part of the Quark Mod. Get the Source Code in github:
+ * https://github.com/Vazkii/Quark
+ * <p>
+ * Quark is Open Source and distributed under the
+ * CC-BY-NC-SA 3.0 License: https://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB
+ * <p>
+ * File Created @ [Jul 20, 2019, 15:50 AM (EST)]
+ */
 package vazkii.quark.base.handler;
 
 import java.util.List;
@@ -7,30 +17,31 @@ import javax.annotation.Nonnull;
 import com.google.common.collect.Lists;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.PistonBlock;
-import net.minecraft.block.PistonBlockStructureHelper;
-import net.minecraft.block.material.PushReaction;
-import net.minecraft.util.Direction;
+import net.minecraft.block.BlockPistonBase;
+import net.minecraft.block.material.EnumPushReaction;
+import net.minecraft.block.state.BlockPistonStructureHelper;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import vazkii.quark.api.ICollateralMover;
 import vazkii.quark.api.ICollateralMover.MoveResult;
 import vazkii.quark.api.INonSticky;
+import vazkii.quark.base.module.GlobalConfig;
 
-public class QuarkPistonStructureHelper extends PistonBlockStructureHelper {
+public class QuarkPistonStructureHelper extends BlockPistonStructureHelper {
 
-	private final PistonBlockStructureHelper parent;
+	private final BlockPistonStructureHelper parent;
 
 	private final World world;
 	private final BlockPos pistonPos;
 	private final BlockPos blockToMove;
-	private final Direction moveDirection;
+	private final EnumFacing moveDirection;
+	private final boolean extending;
 	private final List<BlockPos> toMove = Lists.<BlockPos>newArrayList();
 	private final List<BlockPos> toDestroy = Lists.<BlockPos>newArrayList();
 
-	public QuarkPistonStructureHelper(PistonBlockStructureHelper parent, World worldIn, BlockPos posIn, Direction pistonFacing, boolean extending) {
+	public QuarkPistonStructureHelper(BlockPistonStructureHelper parent, World worldIn, BlockPos posIn, EnumFacing pistonFacing, boolean extending) {
 		super(worldIn, posIn, pistonFacing, extending);
 		this.parent = parent;
 
@@ -43,19 +54,20 @@ public class QuarkPistonStructureHelper extends PistonBlockStructureHelper {
 			this.moveDirection = pistonFacing.getOpposite();
 			this.blockToMove = posIn.offset(pistonFacing, 2);
 		}
+		this.extending = extending;
 	}
 
 	@Override
 	public boolean canMove() {
-		if(!GeneralConfig.usePistonLogicRepl)
+		if(!GlobalConfig.usePistonLogicRepl)
 			return parent.canMove();
 
 		toMove.clear();
 		toDestroy.clear();
-		BlockState iblockstate = world.getBlockState(blockToMove);
+		IBlockState iblockstate = world.getBlockState(blockToMove);
 
-		if(!PistonBlock.canPush(iblockstate, world, blockToMove, moveDirection, false, moveDirection)) {
-			if(iblockstate.getPushReaction() == PushReaction.DESTROY) {
+		if(!BlockPistonBase.canPush(iblockstate, world, blockToMove, moveDirection, false, moveDirection)) {
+			if(iblockstate.getPushReaction() == EnumPushReaction.DESTROY) {
 				toDestroy.add(blockToMove);
 				return true;
 			} else return false;
@@ -74,14 +86,15 @@ public class QuarkPistonStructureHelper extends PistonBlockStructureHelper {
 		}
 	}
 	
-	private boolean addBlockLine(BlockPos origin, Direction face) {
-		final int max = GeneralConfig.pistonPushLimit; 
+	private boolean addBlockLine(BlockPos origin, EnumFacing face) {
+		final int max = GlobalConfig.pistonPushLimit;
 
 		BlockPos target = origin;
-		BlockState iblockstate = world.getBlockState(target);
+		IBlockState iblockstate = world.getBlockState(target);
+		Block block = iblockstate.getBlock();
 
 		if(iblockstate.getBlock().isAir(iblockstate, world, origin) 
-				|| !PistonBlock.canPush(iblockstate, world, origin, moveDirection, false, face)
+				|| !BlockPistonBase.canPush(iblockstate, world, origin, moveDirection, false, face)
 				|| origin.equals(pistonPos)
 				|| toMove.contains(origin))
 			return true;
@@ -93,7 +106,7 @@ public class QuarkPistonStructureHelper extends PistonBlockStructureHelper {
 				return false;
 			else {
 				BlockPos oldPos = origin;
-				BlockState oldState = world.getBlockState(origin); 
+				IBlockState oldState = world.getBlockState(origin); 
 				
 				boolean skippingNext = false;
 				while(true) {
@@ -110,8 +123,9 @@ public class QuarkPistonStructureHelper extends PistonBlockStructureHelper {
 					
 					target = origin.offset(moveDirection.getOpposite(), lineLen);
 					iblockstate = world.getBlockState(target);
+					block = iblockstate.getBlock();
 					
-					if(iblockstate.getBlock().isAir(iblockstate, world, target) || !PistonBlock.canPush(iblockstate, world, target, moveDirection, false, moveDirection.getOpposite()) || target.equals(pistonPos))
+					if(iblockstate.getBlock().isAir(iblockstate, world, target) || !BlockPistonBase.canPush(iblockstate, world, target, moveDirection, false, moveDirection.getOpposite()) || target.equals(pistonPos))
 						break;
 					
 					if(getStickCompatibility(world, iblockstate, oldState, target, oldPos, moveDirection) != MoveResult.MOVE)
@@ -171,10 +185,10 @@ public class QuarkPistonStructureHelper extends PistonBlockStructureHelper {
 						if(iblockstate.getBlock().isAir(iblockstate, world, blockpos1))
 							return true;
 
-						if(!PistonBlock.canPush(iblockstate, world, blockpos1, moveDirection, true, moveDirection) || blockpos1.equals(pistonPos))
+						if(!BlockPistonBase.canPush(iblockstate, world, blockpos1, moveDirection, true, moveDirection) || blockpos1.equals(pistonPos))
 							return false;
 
-						if(iblockstate.getPushReaction() == PushReaction.DESTROY) {
+						if(iblockstate.getPushReaction() == EnumPushReaction.DESTROY) {
 							toDestroy.add(blockpos1);
 							toMove.remove(blockpos1);
 							return true;
@@ -221,15 +235,15 @@ public class QuarkPistonStructureHelper extends PistonBlockStructureHelper {
 
 	@SuppressWarnings("incomplete-switch")
 	private MoveResult addBranchingBlocks(World world, BlockPos fromPos) {
-		BlockState state = world.getBlockState(fromPos);
+		IBlockState state = world.getBlockState(fromPos);
 		Block block = state.getBlock();
 		
-		Direction opposite = moveDirection.getOpposite();
+		EnumFacing opposite = moveDirection.getOpposite();
 		MoveResult retResult = MoveResult.SKIP;
-		for(Direction face : Direction.values()) {
+		for(EnumFacing face : EnumFacing.values()) {
 				MoveResult res = MoveResult.MOVE;
 				BlockPos targetPos = fromPos.offset(face);
-				BlockState targetState = world.getBlockState(targetPos);
+				IBlockState targetState = world.getBlockState(targetPos);
 				
 				if(block instanceof ICollateralMover)
 					res = ((ICollateralMover) block).getCollateralMovement(world, pistonPos, moveDirection, face, fromPos);
@@ -243,7 +257,7 @@ public class QuarkPistonStructureHelper extends PistonBlockStructureHelper {
 						return MoveResult.PREVENT;
 					break;
 				case BREAK:
-					if(PistonBlock.canPush(targetState, world, targetPos, moveDirection, true, moveDirection)) {
+					if(BlockPistonBase.canPush(targetState, world, targetPos, moveDirection, true, moveDirection)) {
 						toDestroy.add(targetPos);
 						toMove.remove(targetPos);
 						return MoveResult.BREAK;
@@ -260,14 +274,14 @@ public class QuarkPistonStructureHelper extends PistonBlockStructureHelper {
 	}
 
 	private boolean isBlockBranching(World world, BlockPos pos) {
-		BlockState state = world.getBlockState(pos);
+		IBlockState state = world.getBlockState(pos);
 		Block block = state.getBlock();
 
 		return block instanceof ICollateralMover ? ((ICollateralMover) block).isCollateralMover(world, pistonPos, moveDirection, pos) : state.getBlock().isStickyBlock(state);
 	}
 	
 	private MoveResult getBranchResult(World world, BlockPos pos) {
-		BlockState state = world.getBlockState(pos);
+		IBlockState state = world.getBlockState(pos);
 		Block block = state.getBlock();
 
 		if(block instanceof ICollateralMover)
@@ -276,33 +290,22 @@ public class QuarkPistonStructureHelper extends PistonBlockStructureHelper {
 		return MoveResult.MOVE;
 	}
 	
-	private MoveResult getStickCompatibility(World world, BlockState state1, BlockState state2, BlockPos pos1, BlockPos pos2, Direction face) {
-		INonSticky stick = getStickCondition(state1);
-		if(stick != null && !stick.canStickToBlock(world, pistonPos, pos1, pos2, state1, state2, moveDirection))
+	private MoveResult getStickCompatibility(World world, IBlockState state1, IBlockState state2, BlockPos pos1, BlockPos pos2, EnumFacing face) {
+		Block block = state1.getBlock();
+		if(block instanceof INonSticky && !((INonSticky) block).canStickToBlock(world, pistonPos, pos1, pos2, state1, state2, moveDirection))
 			return MoveResult.SKIP;
 		
-		stick = getStickCondition(state2);
-		if(stick != null && !stick.canStickToBlock(world, pistonPos, pos2, pos1, state2, state1, moveDirection))
+		block = state2.getBlock();
+		if(block instanceof INonSticky && !((INonSticky) block).canStickToBlock(world, pistonPos, pos2, pos1, state2, state1, moveDirection))
 			return MoveResult.SKIP;
-
+		
 		return MoveResult.MOVE;
-	}
-	
-	private INonSticky getStickCondition(BlockState state) {
-		Block block = state.getBlock();
-		if(block == Blocks.HONEY_BLOCK)
-			return HoneyStickCondition.INSTANCE;
-		
-		if(block instanceof INonSticky)
-			return (INonSticky) block;
-		
-		return null;
 	}
 
 	@Nonnull
 	@Override
 	public List<BlockPos> getBlocksToMove() {
-		if(!GeneralConfig.usePistonLogicRepl) 
+		if(!GlobalConfig.usePistonLogicRepl)
 			return parent.getBlocksToMove();
 
 		return toMove;
@@ -311,23 +314,10 @@ public class QuarkPistonStructureHelper extends PistonBlockStructureHelper {
 	@Nonnull
 	@Override
 	public List<BlockPos> getBlocksToDestroy() {
-		if(!GeneralConfig.usePistonLogicRepl) 
+		if(!GlobalConfig.usePistonLogicRepl)
 			return parent.getBlocksToDestroy();
 
 		return toDestroy;
-	}
-	
-	private static class HoneyStickCondition implements INonSticky {
-
-		private static final HoneyStickCondition INSTANCE = new HoneyStickCondition();
-		
-		@Override
-		public boolean canStickToBlock(World world, BlockPos pistonPos, BlockPos pos, BlockPos slimePos, BlockState state, BlockState slimeState, Direction direction) {
-			Block block = state.getBlock();
-			Block slime = slimeState.getBlock();
-			return !slime.isStickyBlock(slimeState) || block == slime;
-		}
-		
 	}
 
 }

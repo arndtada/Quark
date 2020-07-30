@@ -1,28 +1,26 @@
 package vazkii.quark.base.handler;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.util.Direction;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemHandlerHelper;
 import vazkii.arl.util.ItemNBTHelper;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 /**
  * @author WireSegal
  * Created at 4:27 PM on 12/15/18.
  */
 public class ProxiedItemStackHandler implements IItemHandler, IItemHandlerModifiable, ICapabilityProvider {
-	
 	protected final ItemStack stack;
 	protected final String key;
 	protected final int size;
@@ -45,13 +43,13 @@ public class ProxiedItemStackHandler implements IItemHandler, IItemHandlerModifi
 		this.size = size;
 	}
 
-	private ListNBT getStackList() {
-		ListNBT list = ItemNBTHelper.getList(stack, key, Constants.NBT.TAG_COMPOUND, true);
+	private NBTTagList getStackList() {
+		NBTTagList list = ItemNBTHelper.getList(stack, key, Constants.NBT.TAG_COMPOUND, true);
 		if (list == null)
-			ItemNBTHelper.setList(stack, key, list = new ListNBT());
+			ItemNBTHelper.setList(stack, key, list = new NBTTagList());
 
-		while (list.size() < size)
-			list.add(new CompoundNBT());
+		while (list.tagCount() < size)
+			list.appendTag(new NBTTagCompound());
 
 		return list;
 	}
@@ -62,7 +60,7 @@ public class ProxiedItemStackHandler implements IItemHandler, IItemHandlerModifi
 	}
 
 	private ItemStack readStack(int index) {
-		return ItemStack.read(getStackList().getCompound(index));
+		return new ItemStack(getStackList().getCompoundTagAt(index));
 	}
 
 	@Override
@@ -166,9 +164,15 @@ public class ProxiedItemStackHandler implements IItemHandler, IItemHandlerModifi
 		// NO-OP
 	}
 
+	@Override
+	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
+	}
+
 	@Nullable
 	@Override
-	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing) {
-		return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.orEmpty(capability, LazyOptional.of(() -> this));
+	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ?
+				CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this) : null;
 	}
 }

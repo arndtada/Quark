@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"": { "model": "quark:block/sturdy_stone" }
+		"normal": { "model": "quark:sturdy_stone" }
 	}
 }

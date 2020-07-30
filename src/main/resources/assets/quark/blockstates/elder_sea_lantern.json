@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"": { "model": "quark:block/elder_sea_lantern" }
+		"normal": { "model": "quark:elder_sea_lantern" }
 	}
 }

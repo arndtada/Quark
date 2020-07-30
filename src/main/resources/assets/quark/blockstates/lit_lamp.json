@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"": { "model": "minecraft:block/redstone_lamp_on" }
+		"normal": { "model": "quark:lit_lamp" }
 	}
 }

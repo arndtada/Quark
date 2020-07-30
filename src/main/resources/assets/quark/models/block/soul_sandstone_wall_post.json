@@ -1,6 +1,6 @@
 {
-    "parent": "block/template_wall_post",
-    "textures": {
-        "wall": "quark:block/soul_sandstone"
-    }
+	"parent": "minecraft:block/wall_post",
+	"textures": {
+		"wall": "quark:blocks/soul_sandstone_bottom"
+	}
 }

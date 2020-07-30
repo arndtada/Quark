@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"": { "model": "quark:block/biotite_ore" }
+		"normal": { "model": "quark:biotite_ore" }
 	}
 }

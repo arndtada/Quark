@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"": { "model": "quark:block/framed_glass" }
+		"normal": { "model": "quark:framed_glass" }
 	}
 }

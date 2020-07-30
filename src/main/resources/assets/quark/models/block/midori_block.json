@@ -1,6 +1,6 @@
 {
 	"parent": "block/cube_all",
 	"textures": {
-		"all": "quark:block/midori_block"
+		"all": "quark:blocks/midori_block"
 	}
 }

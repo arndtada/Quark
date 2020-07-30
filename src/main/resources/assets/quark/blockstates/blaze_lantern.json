@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"": { "model": "quark:block/blaze_lantern" }
+		"normal": { "model": "quark:blaze_lantern" }
 	}
 }

@@ -1,29 +1,29 @@
 {
     "multipart": [
-        {   "apply": { "model": "quark:block/paper_wall_big_post" }},
+        {   "apply": { "model": "quark:paper_wall_post_big" }},
         {   "when": { "north": true },
-            "apply": { "model": "quark:block/paper_wall_big_side" }
+            "apply": { "model": "quark:paper_wall_side_big" }
         },
         {   "when": { "east": true },
-            "apply": { "model": "quark:block/paper_wall_big_side", "y": 90 }
+            "apply": { "model": "quark:paper_wall_side_big", "y": 90 }
         },
         {   "when": { "south": true },
-            "apply": { "model": "quark:block/paper_wall_big_side_alt" }
+            "apply": { "model": "quark:paper_wall_side_alt_big" }
         },
         {   "when": { "west": true },
-            "apply": { "model": "quark:block/paper_wall_big_side_alt", "y": 90 }
+            "apply": { "model": "quark:paper_wall_side_alt_big", "y": 90 }
         },
         {   "when": { "north": false },
-            "apply": { "model": "quark:block/paper_wall_big_noside" }
+            "apply": { "model": "quark:paper_wall_noside_big" }
         },
         {   "when": { "east": false },
-            "apply": { "model": "quark:block/paper_wall_big_noside_alt" }
+            "apply": { "model": "quark:paper_wall_noside_alt_big" }
         },
         {   "when": { "south": false },
-            "apply": { "model": "quark:block/paper_wall_big_noside_alt", "y": 90 }
+            "apply": { "model": "quark:paper_wall_noside_alt_big", "y": 90 }
         },
         {   "when": { "west": false },
-            "apply": { "model": "quark:block/paper_wall_big_noside", "y": 270 }
+            "apply": { "model": "quark:paper_wall_noside_big", "y": 270 }
         }
     ]
 }

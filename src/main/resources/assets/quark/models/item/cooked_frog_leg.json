@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "quark:item/cooked_frog_leg"
-    }
+	"parent": "item/generated",
+	"textures": { 
+		"layer0": "quark:items/cooked_frog_leg"
+	}
 }

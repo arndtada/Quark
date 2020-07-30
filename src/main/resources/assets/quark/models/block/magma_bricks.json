@@ -1,6 +1,6 @@
 {
 	"parent": "block/cube_all",
 	"textures": {
-		"all": "quark:block/magma_bricks"
+		"all": "quark:blocks/magma_bricks"
 	}
 }

@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "quark:item/biotite"
-    }
+	"parent": "item/generated",
+	"textures": { 
+		"layer0": "quark:items/biotite"
+	}
 }

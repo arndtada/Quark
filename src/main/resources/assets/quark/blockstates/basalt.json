@@ -1,5 +1,11 @@
 {
+	"forge_marker": 1,
+	"defaults": {
+		"model": "minecraft:cube_all",
+		"transform": "forge:default-block"
+	},
 	"variants": {
-		"": { "model": "quark:block/basalt" }
+		"variant=stone_basalt": [{ "textures": { "all": "quark:blocks/stone_basalt" } }],
+		"variant=stone_basalt_smooth": [{ "textures": { "all": "quark:blocks/stone_basalt_smooth" } }]
 	}
 }

@@ -10,16 +10,15 @@
  */
 package vazkii.quark.base.capability;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Direction;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class SelfProvider<V> implements ICapabilityProvider {
 
@@ -36,12 +35,14 @@ public class SelfProvider<V> implements ICapabilityProvider {
 		return new SelfProvider<>(capability, (V) self);
 	}
 
+	@SuppressWarnings("unchecked")
 	public static <V> void attachItem(ResourceLocation location,
 									  Capability<V> capability,
 									  AttachCapabilitiesEvent<ItemStack> event) {
 		event.addCapability(location, provide(capability, event.getObject().getItem()));
 	}
 
+	@SuppressWarnings("unchecked")
 	public static <V, C extends ICapabilityProvider> void attach(ResourceLocation location,
 																 Capability<V> capability,
 																 AttachCapabilitiesEvent<C> event) {
@@ -49,10 +50,14 @@ public class SelfProvider<V> implements ICapabilityProvider {
 	}
 
 
+	@Override
+	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		return capability == this.capability;
+	}
+
 	@Nullable
 	@Override
-	@SuppressWarnings("unchecked")
-	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing) {
-		return capability == this.capability  ? LazyOptional.of(() -> (T) self) : LazyOptional.empty();
+	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		return capability == this.capability ? this.capability.cast(self) : null;
 	}
 }

@@ -5,7 +5,6 @@ import vazkii.aurelienribon.tweenengine.TweenAccessor;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
-@SuppressWarnings("serial")
 public class MutableFloat extends Number implements TweenAccessor<MutableFloat> {
 	private float value;
 

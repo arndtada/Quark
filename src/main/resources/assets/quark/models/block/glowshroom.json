@@ -1,6 +1,6 @@
 {
     "parent": "block/cross",
     "textures": {
-        "cross": "quark:block/glowshroom"
+        "cross": "quark:blocks/glowshroom_blue"
     }
 }

@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"": { "model": "quark:block/duskbound_lantern" }
+		"normal": { "model": "quark:duskbound_lantern" }
 	}
 }

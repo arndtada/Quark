@@ -1,5 +1,11 @@
 {
+	"forge_marker": 1,
+	"defaults": {
+		"model": "minecraft:cube_all",
+		"transform": "forge:default-block"
+	},
 	"variants": {
-		"": { "model": "quark:block/jasper" }
+		"variant=stone_jasper": [{ "textures": { "all": "quark:blocks/stone_jasper" } }],
+		"variant=stone_jasper_smooth": [{ "textures": { "all": "quark:blocks/stone_jasper_smooth" } }]
 	}
 }

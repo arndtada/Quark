@@ -1,11 +1,11 @@
 {
   "__comment": "Designed by Wire Segal with Cubik Studio - https://cubik.studio",
   "textures": {
-    "base": "quark:block/inductor_base",
-    "magma": "quark:block/inductor_magma",
-    "slab": "block/smooth_stone",
-    "particle": "block/smooth_stone",
-    "wire": "quark:block/inductor_wire"
+    "base": "quark:blocks/inductor_base",
+    "magma": "quark:blocks/inductor_magma",
+    "slab": "blocks/stone_slab_top",
+    "particle": "blocks/stone_slab_top",
+    "wire": "quark:blocks/inductor_wire"
   },
   "elements": [
     {
@@ -13,12 +13,12 @@
       "from": [ 0, 0, 0 ],
       "to": [ 16, 2, 16 ],
       "faces": {
-        "down": { "uv": [ 0, 0, 16, 16 ], "texture": "#slab", "cullface": "down" },
+        "down": { "uv": [ 0, 0, 16, 16 ], "texture": "#slab" },
         "up": { "uv": [ 0, 0, 16, 16 ], "texture": "#base" },
-        "north": { "uv": [ 0, 14, 16, 16 ], "texture": "#slab", "cullface": "north" },
-        "south": { "uv": [ 0, 14, 16, 16 ], "texture": "#slab", "cullface": "south" },
-        "west": { "uv": [ 0, 14, 16, 16 ], "texture": "#slab", "cullface": "west" },
-        "east": { "uv": [ 0, 14, 16, 16 ], "texture": "#slab", "cullface": "east" }
+        "north": { "uv": [ 0, 14, 16, 16 ], "texture": "#slab" },
+        "south": { "uv": [ 0, 14, 16, 16 ], "texture": "#slab" },
+        "west": { "uv": [ 0, 14, 16, 16 ], "texture": "#slab" },
+        "east": { "uv": [ 0, 14, 16, 16 ], "texture": "#slab" }
       }
     },
     {

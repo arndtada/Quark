@@ -1,6 +1,0 @@
-{
-  "parent": "block/item_frame_map",
-  "textures": {
-    "back": "quark:block/light_gray_frame_base"
-  }
-}

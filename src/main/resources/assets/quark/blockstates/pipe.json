@@ -2,77 +2,77 @@
     "multipart": [
         {   
         	"when": { "north": "pipe|terminal" },
-            "apply": { "model": "quark:block/pipe_side" }
+            "apply": { "model": "quark:pipe_side" }
         },
         {   
         	"when": { "south": "pipe|terminal" },
-            "apply": { "model": "quark:block/pipe_side", "y": 180 }
+            "apply": { "model": "quark:pipe_side", "y": 180 }
         },
         {   
         	"when": { "east": "pipe|terminal" },
-            "apply": { "model": "quark:block/pipe_side", "y": 90 }
+            "apply": { "model": "quark:pipe_side", "y": 90 }
         },
         {   
         	"when": { "west": "pipe|terminal" },
-            "apply": { "model": "quark:block/pipe_side", "y": 270 }
+            "apply": { "model": "quark:pipe_side", "y": 270 }
         },
 		{   
         	"when": { "down": "pipe|terminal" },
-            "apply": { "model": "quark:block/pipe_side", "x": 90 }
+            "apply": { "model": "quark:pipe_side", "x": 90 }
         },
         {   
         	"when": { "up": "pipe|terminal" },
-            "apply": { "model": "quark:block/pipe_side", "x": 270 }
+            "apply": { "model": "quark:pipe_side", "x": 270 }
         },
 
         {   
         	"when": { "north": "terminal" },
-            "apply": { "model": "quark:block/pipe_connector" }
+            "apply": { "model": "quark:pipe_connector" }
         },
         {   
         	"when": { "south": "terminal" },
-            "apply": { "model": "quark:block/pipe_connector", "y": 180 }
+            "apply": { "model": "quark:pipe_connector", "y": 180 }
         },
         {   
         	"when": { "east": "terminal" },
-            "apply": { "model": "quark:block/pipe_connector", "y": 90 }
+            "apply": { "model": "quark:pipe_connector", "y": 90 }
         },
         {   
         	"when": { "west": "terminal" },
-            "apply": { "model": "quark:block/pipe_connector", "y": 270 }
+            "apply": { "model": "quark:pipe_connector", "y": 270 }
         },
         {   
         	"when": { "down": "terminal" },
-            "apply": { "model": "quark:block/pipe_connector", "x": 90 }
+            "apply": { "model": "quark:pipe_connector", "x": 90 }
         },
         {   
         	"when": { "up": "terminal" },
-            "apply": { "model": "quark:block/pipe_connector", "x": 270 }
+            "apply": { "model": "quark:pipe_connector", "x": 270 }
         },
 
         {   
         	"when": { "north": "prop" },
-            "apply": { "model": "quark:block/pipe_prop" }
+            "apply": { "model": "quark:pipe_prop" }
         },
         {   
         	"when": { "south": "prop" },
-            "apply": { "model": "quark:block/pipe_prop", "y": 180 }
+            "apply": { "model": "quark:pipe_prop", "y": 180 }
         },
         {   
         	"when": { "east": "prop" },
-            "apply": { "model": "quark:block/pipe_prop", "y": 90 }
+            "apply": { "model": "quark:pipe_prop", "y": 90 }
         },
         {   
         	"when": { "west": "prop" },
-            "apply": { "model": "quark:block/pipe_prop", "y": 270 }
+            "apply": { "model": "quark:pipe_prop", "y": 270 }
         },
         {   
         	"when": { "down": "prop" },
-            "apply": { "model": "quark:block/pipe_prop", "x": 90 }
+            "apply": { "model": "quark:pipe_prop", "x": 90 }
         },
         {   
         	"when": { "up": "prop" },
-            "apply": { "model": "quark:block/pipe_prop", "x": 270 }
+            "apply": { "model": "quark:pipe_prop", "x": 270 }
         },
 
       {
@@ -84,7 +84,7 @@
           "up": "none|prop",
           "down": "none|prop"
         },
-        "apply": { "model": "quark:block/pipe_flare" }
+        "apply": { "model": "quark:pipe_flare" }
       },
       {
         "when": {
@@ -95,7 +95,7 @@
           "up": "none|prop",
           "down": "none|prop"
         },
-        "apply": { "model": "quark:block/pipe_flare", "y": 180 }
+        "apply": { "model": "quark:pipe_flare", "y": 180 }
       },
       {
         "when": {
@@ -106,7 +106,7 @@
           "up": "none|prop",
           "down": "none|prop"
         },
-        "apply": { "model": "quark:block/pipe_flare", "y": 90 }
+        "apply": { "model": "quark:pipe_flare", "y": 90 }
       },
       {
         "when": {
@@ -117,7 +117,7 @@
           "up": "none|prop",
           "down": "none|prop"
         },
-        "apply": { "model": "quark:block/pipe_flare", "y": 270 }
+        "apply": { "model": "quark:pipe_flare", "y": 270 }
       },
       {
         "when": {
@@ -128,7 +128,7 @@
           "up": "pipe|terminal",
           "down": "none"
         },
-        "apply": { "model": "quark:block/pipe_flare", "x": 90 }
+        "apply": { "model": "quark:pipe_flare", "x": 90 }
       },
       {
         "when": {
@@ -139,7 +139,7 @@
           "up": "none",
           "down": "pipe|terminal"
         },
-        "apply": { "model": "quark:block/pipe_flare", "x": 270 }
+        "apply": { "model": "quark:pipe_flare", "x": 270 }
       },
       {
         "when": {
@@ -170,7 +170,7 @@
             }
           ]
         },
-        "apply": { "model": "quark:block/pipe_center_side" }
+        "apply": { "model": "quark:pipe_center_side" }
       },
       {
 
@@ -202,7 +202,7 @@
             }
           ]
         },
-        "apply": { "model": "quark:block/pipe_center_side", "y": 180 }
+        "apply": { "model": "quark:pipe_center_side", "y": 180 }
       },
       {
 
@@ -234,7 +234,7 @@
             }
           ]
         },
-        "apply": { "model": "quark:block/pipe_center_side", "y": 90 }
+        "apply": { "model": "quark:pipe_center_side", "y": 90 }
       },
       {
 
@@ -266,7 +266,7 @@
             }
           ]
         },
-        "apply": { "model": "quark:block/pipe_center_side", "y": 270 }
+        "apply": { "model": "quark:pipe_center_side", "y": 270 }
       },
       {
 
@@ -298,7 +298,7 @@
             }
           ]
         },
-        "apply": { "model": "quark:block/pipe_center_side", "x": 90 }
+        "apply": { "model": "quark:pipe_center_side", "x": 90 }
       },
       {
 
@@ -330,7 +330,7 @@
             }
           ]
         },
-        "apply": { "model": "quark:block/pipe_center_side", "x": 270 }
+        "apply": { "model": "quark:pipe_center_side", "x": 270 }
       }
     ]
 }

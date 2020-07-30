@@ -16,6 +16,7 @@ import java.util.function.Consumer;
  * @see Timeline
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
+@SuppressWarnings("PackageVisibleField")
 public abstract class BaseTween<T> {
 	// General
 	private int step;
@@ -217,6 +218,7 @@ public abstract class BaseTween<T> {
 	 * @see TweenCallback
 	 * @see #setCallbackTriggers(int)
 	 */
+	@SuppressWarnings("unchecked")
 	public T addCallback(int flags, Consumer<BaseTween<?>> callback) {
 		this.callbackTriggers |= flags;
 
