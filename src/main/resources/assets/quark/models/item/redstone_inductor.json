@@ -1,6 +1,6 @@
 {
-	"parent": "item/generated",
-	"textures": { 
-		"layer0": "quark:items/redstone_inductor"
-	}
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "quark:item/redstone_inductor"
+    }
 }

@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/wall_post",
-	"textures": {
-		"wall": "quark:blocks/elder_prismarine"
-	}
+    "parent": "block/template_wall_post",
+    "textures": {
+        "wall": "quark:block/elder_prismarine"
+    }
 }

@@ -1,5 +1,5 @@
 {
-	"variants": {
-		"normal": { "model": "quark:grate" }
-	}
+  "variants": {
+    "": { "model": "quark:block/grate" }
+  }
 }

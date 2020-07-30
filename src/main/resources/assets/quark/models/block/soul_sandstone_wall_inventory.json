@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/wall_inventory",
-	"textures": {
-		"wall": "quark:blocks/soul_sandstone_bottom"
-	}
+    "parent": "block/wall_inventory",
+    "textures": {
+        "wall": "quark:block/soul_sandstone"
+    }
 }

@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "quark:snow_bricks" }
+		"": { "model": "quark:block/snow_bricks" }
 	}
 }

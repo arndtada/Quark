@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/wall_inventory",
-	"textures": {
-		"wall": "quark:blocks/stone_marble"
-	}
+    "parent": "block/wall_inventory",
+    "textures": {
+        "wall": "quark:block/marble"
+    }
 }

@@ -1,20 +1,7 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "minecraft:half_slab",
-    "textures": {
-      "bottom": "quark:blocks/elder_prismarine",
-      "top": "quark:blocks/elder_prismarine",
-      "side": "quark:blocks/elder_prismarine"
-    },
-    "transform": "forge:default-block"
-  },
-  "variants": {
-    "half=top": [{
-      "x": 180,
-      "uvlock": true
-    }],
-    "half=bottom": [{}],
-    "inventory": [{}]
-  }
+    "variants": {
+        "type=bottom": { "model": "quark:block/elder_prismarine_slab" },
+        "type=top": { "model": "quark:block/elder_prismarine_slab_top" },
+        "type=double": { "model": "quark:block/elder_prismarine" }
+    }
 }

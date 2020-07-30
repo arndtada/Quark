@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "quark:charcoal_block" }
+		"": { "model": "quark:block/charcoal_block" }
 	}
 }

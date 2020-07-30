@@ -1,16 +1,7 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-        "model": "minecraft:cube_all",
-        "transform": "forge:default-block",
-        "textures": {
-            "block": "minecraft:blocks/stone_granite"
-        }
-    },
     "variants": {
-        "inventory": [{ "model": "quark:speleothem_medium" }],
-        "size=small": [{ "model": "quark:speleothem_small" }],
-        "size=medium": [{ "model": "quark:speleothem_medium" }],
-        "size=big": [{ "model": "quark:speleothem_big" }]
+        "size=small": { "model": "quark:block/granite_speleothem_small" },
+        "size=medium": { "model": "quark:block/granite_speleothem_medium" },
+        "size=big": { "model": "quark:block/granite_speleothem_big" }
     }
 }

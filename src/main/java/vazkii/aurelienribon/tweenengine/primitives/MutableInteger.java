@@ -5,6 +5,7 @@ import vazkii.aurelienribon.tweenengine.TweenAccessor;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
+@SuppressWarnings("serial")
 public class MutableInteger extends Number implements TweenAccessor<MutableInteger> {
 	private int value;
 

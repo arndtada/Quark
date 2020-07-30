@@ -1,20 +1,7 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "minecraft:half_slab",
-    "textures": {
-      "bottom": "quark:blocks/duskbound_block",
-      "top": "quark:blocks/duskbound_block",
-      "side": "quark:blocks/duskbound_block"
-    },
-    "transform": "forge:default-block"
-  },
-  "variants": {
-    "half=top": [{
-      "x": 180,
-      "uvlock": true
-    }],
-    "half=bottom": [{}],
-    "inventory": [{}]
-  }
+    "variants": {
+        "type=bottom": { "model": "quark:block/duskbound_block_slab" },
+        "type=top": { "model": "quark:block/duskbound_block_slab_top" },
+        "type=double": { "model": "quark:block/duskbound_block" }
+    }
 }

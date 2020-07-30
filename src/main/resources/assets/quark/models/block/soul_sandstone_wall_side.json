@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/wall_side",
-	"textures": {
-		"wall": "quark:blocks/soul_sandstone_bottom"
-	}
+    "parent": "block/template_wall_side",
+    "textures": {
+        "wall": "quark:block/soul_sandstone"
+    }
 }

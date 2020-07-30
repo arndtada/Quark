@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "quark:monster_box" }
+		"": { "model": "quark:block/monster_box" }
 	}
 }

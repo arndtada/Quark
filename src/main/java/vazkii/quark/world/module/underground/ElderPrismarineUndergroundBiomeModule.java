@@ -1,0 +1,66 @@
+package vazkii.quark.world.module.underground;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
+import net.minecraft.item.ItemGroup;
+import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.BiomeDictionary.Type;
+import vazkii.quark.base.block.QuarkBlock;
+import vazkii.quark.base.handler.VariantHandler;
+import vazkii.quark.base.module.Config;
+import vazkii.quark.base.module.LoadModule;
+import vazkii.quark.base.module.ModuleCategory;
+import vazkii.quark.world.config.UndergroundBiomeConfig;
+import vazkii.quark.world.gen.underground.ElderPrismarineUndergroundBiome;
+
+@LoadModule(category = ModuleCategory.WORLD)
+public class ElderPrismarineUndergroundBiomeModule extends UndergroundBiomeModule {
+
+	public static QuarkBlock elder_prismarine;
+	public static Block elder_sea_lantern;
+
+	@Config
+	@Config.Min(0)
+	@Config.Max(1)
+	public static double waterChance = 0.25;
+
+	@Config
+	@Config.Min(0)
+	@Config.Max(1)
+	public static double lanternChance = 0.0085;
+
+    @Override
+	public void construct() {
+		elder_prismarine = new QuarkBlock("elder_prismarine", this, ItemGroup.BUILDING_BLOCKS, 
+				Block.Properties.create(Material.ROCK, MaterialColor.ADOBE)
+				.func_235861_h_() // needs tool
+        		.harvestTool(ToolType.PICKAXE)
+				.hardnessAndResistance(1.5F, 10F)
+				.sound(SoundType.STONE));
+		
+		VariantHandler.addSlabStairsWall(elder_prismarine);
+		VariantHandler.addSlabAndStairs(new QuarkBlock("elder_prismarine_bricks", this, ItemGroup.BUILDING_BLOCKS, Block.Properties.from(elder_prismarine)));
+		VariantHandler.addSlabAndStairs(new QuarkBlock("dark_elder_prismarine", this, ItemGroup.BUILDING_BLOCKS, Block.Properties.from(elder_prismarine)));
+		
+		elder_sea_lantern = new QuarkBlock("elder_sea_lantern", this, ItemGroup.BUILDING_BLOCKS, 
+				Block.Properties.create(Material.GLASS, MaterialColor.ADOBE)
+				.hardnessAndResistance(0.3F)
+				.func_235838_a_(b -> 15) // lightValue
+				.sound(SoundType.GLASS));
+		
+		super.construct();
+	}
+    
+	@Override
+	protected String getBiomeName() {
+		return "elder_prismarine";
+	}
+	
+	@Override
+	protected UndergroundBiomeConfig getBiomeConfig() {
+		return new UndergroundBiomeConfig(new ElderPrismarineUndergroundBiome(), 200, Type.OCEAN);
+	}
+
+}

@@ -1,0 +1,28 @@
+{
+  "replace": false,
+  "values": [
+    "quark:potted_beetroot",
+    "quark:potted_berries",
+    "quark:potted_blue_blossom_sapling",
+    "quark:potted_carrot",
+    "quark:potted_chorus",
+    "quark:potted_cocoa_bean",
+    "quark:potted_glowshroom",
+    "quark:potted_grass",
+    "quark:potted_lavender_blossom_sapling",
+    "quark:potted_lilac",
+    "quark:potted_melon",
+    "quark:potted_nether_wart",
+    "quark:potted_orange_blossom_sapling",
+    "quark:potted_peony",
+    "quark:potted_pink_blossom_sapling",
+    "quark:potted_potato",
+    "quark:potted_pumpkin",
+    "quark:potted_rose",
+    "quark:potted_sea_pickle",
+    "quark:potted_sugar_cane",
+    "quark:potted_sunflower",
+    "quark:potted_wheat",
+    "quark:potted_yellow_blossom_sapling"
+  ]
+}

@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "quark:duskbound_block" }
+		"": { "model": "quark:block/duskbound_block" }
 	}
 }

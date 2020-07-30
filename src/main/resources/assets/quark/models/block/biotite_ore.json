@@ -1,6 +1,6 @@
 {
 	"parent": "block/cube_all",
 	"textures": {
-		"all": "quark:blocks/biotite_ore"
+		"all": "quark:block/biotite_ore"
 	}
 }

@@ -60,3 +60,10 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Python cache
+__pycache__
+*.pyc
+
+# Web
+web/cached.php

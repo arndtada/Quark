@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/wall_post",
-	"textures": {
-		"wall": "quark:blocks/snow_bricks"
-	}
+    "parent": "block/template_wall_post",
+    "textures": {
+        "wall": "quark:block/snow_bricks"
+    }
 }

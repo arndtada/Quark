@@ -1,11 +1,11 @@
 {
 	"__comment": "Designed by Wiiv with Cubik Studio - https://cubik.studio",
 	"textures": {
-		"particle": "blocks/repeater_on",
-		"slab": "blocks/stone_slab_top",
-		"top": "quark:blocks/randomizer_on_left",
-		"lit": "blocks/redstone_torch_on",
-		"unlit": "blocks/redstone_torch_off"
+		"particle": "block/smooth_stone",
+		"slab": "block/smooth_stone",
+		"top": "quark:block/randomizer_on_left",
+		"unlit": "block/redstone_torch_off",
+		"lit": "block/redstone_torch"
 	},
 	"elements": [ 	 
 		{
@@ -78,7 +78,6 @@
 			"from": [ 12, 2, 7 ],
 			"to": [ 14, 7, 9 ],
 			"faces": {
-				"down": { "uv": [ 7, 12, 9, 14 ], "texture": "#unlit" },
 				"up": { "uv": [ 7, 6, 9, 8 ], "texture": "#unlit" },
 				"north": { "uv": [ 7, 6, 9, 11 ], "texture": "#unlit" },
 				"south": { "uv": [ 7, 6, 9, 11 ], "texture": "#unlit" },
@@ -91,7 +90,6 @@
 			"from": [ 6, 2, 6 ],
 			"to": [ 10, 4, 10 ],
 			"faces": {
-				"down": { "uv": [ 6, 6, 10, 10 ], "texture": "#top" },
 				"up": { "uv": [ 6, 6, 10, 10 ], "texture": "#top" },
 				"north": { "uv": [ 6, 8, 10, 10 ], "texture": "#top" },
 				"south": { "uv": [ 6, 6, 10, 8 ], "texture": "#top" },

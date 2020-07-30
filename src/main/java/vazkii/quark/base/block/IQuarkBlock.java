@@ -1,40 +1,54 @@
-/**
- * This class was created by <Vazkii>. It's distributed as
- * part of the Quark Mod. Get the Source Code in github:
- * https://github.com/Vazkii/Quark
- * 
- * Quark is Open Source and distributed under the
- * CC-BY-NC-SA 3.0 License: https://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB
- * 
- * File Created @ [28/08/2016, 00:23:31 (GMT)]
- */
 package vazkii.quark.base.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.util.ResourceLocation;
-import vazkii.arl.interf.IModBlock;
-import vazkii.arl.item.ItemModBlock;
-import vazkii.arl.util.ProxyRegistry;
-import vazkii.quark.base.lib.LibMisc;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.material.Material;
+import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
+import net.minecraftforge.common.extensions.IForgeBlock;
+import vazkii.quark.base.module.Module;
 
-public interface IQuarkBlock extends IModBlock {
+import javax.annotation.Nullable;
+import java.util.function.BooleanSupplier;
 
-	@Override
-	default String getModNamespace() {
-		return LibMisc.MOD_ID;
-	}
+/**
+ * @author WireSegal
+ * Created at 1:14 PM on 9/19/19.
+ */
+public interface IQuarkBlock extends IForgeBlock {
 
-	default void register(String name) {
-		Block self = (Block) this;
-		ResourceLocation regName = new ResourceLocation(LibMisc.PREFIX_MOD + name);
-		self.setRegistryName(regName);
-		ProxyRegistry.register(self);
-		ProxyRegistry.register(createItemInstance(regName));
-	}
+    @Nullable
+    Module getModule();
 
-	default ItemBlock createItemInstance(ResourceLocation regName) {
-		return new ItemModBlock((Block) this, regName);
-	}
-	
+    IQuarkBlock setCondition(BooleanSupplier condition);
+
+    boolean doesConditionApply();
+
+    default boolean isEnabled() {
+        Module module = getModule();
+        return module != null && module.enabled && doesConditionApply();
+    }
+
+    @Override
+    default int getFlammability(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
+        if (state.getValues().containsKey(BlockStateProperties.WATERLOGGED) && state.get(BlockStateProperties.WATERLOGGED))
+            return 0;
+
+        Material material = state.getMaterial();
+        if (material == Material.WOOL)
+            return 60;
+        return state.getMaterial().isFlammable() ? 20 : 0;
+    }
+
+    @Override
+    default int getFireSpreadSpeed(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
+        if (state.getValues().containsKey(BlockStateProperties.WATERLOGGED) && state.get(BlockStateProperties.WATERLOGGED))
+            return 0;
+
+        Material material = state.getMaterial();
+        if (material == Material.WOOL)
+            return 30;
+        return state.getMaterial().isFlammable() ? 5 : 0;
+    }
 }

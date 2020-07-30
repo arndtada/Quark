@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "quark:thatch" }
+		"": { "model": "quark:block/thatch" }
 	}
 }

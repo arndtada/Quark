@@ -2,10 +2,10 @@
 	"__comment": "Designed by Wiiv with Cubik Studio - https://cubik.studio",
 	"parent": "minecraft:block/block",
 	"textures": {
-		"particle": "quark:blocks/paper_lantern_side",
-		"side": "quark:blocks/paper_lantern_side",
-		"bottom": "quark:blocks/paper_lantern_top_bottom",
-		"inside": "quark:blocks/paper_lantern_inside"
+		"particle": "quark:block/paper_lantern_side",
+		"side": "quark:block/paper_lantern_side",
+		"bottom": "quark:block/paper_lantern_top_bottom",
+		"inside": "quark:block/paper_lantern_inside"
 	},
 	"elements": [ 	 
 		{
@@ -26,8 +26,7 @@
 			"from": [ 6, 14, 6 ],
 			"to": [ 10, 16, 10 ],
 			"faces": {
-				"down": { "uv": [ 6, 2, 10, 6 ], "texture": "#inside" },
-				"up": { "uv": [ 6, 2, 10, 6 ], "texture": "#inside" },
+				"up": { "uv": [ 6, 2, 10, 6 ], "texture": "#inside", "cullface": "up" },
 				"north": { "uv": [ 6, 0, 10, 2 ], "texture": "#inside" },
 				"south": { "uv": [ 6, 0, 10, 2 ], "texture": "#inside" },
 				"west": { "uv": [ 6, 0, 10, 2 ], "texture": "#inside" },
@@ -130,8 +129,7 @@
 			"from": [ 6, 0, 6 ],
 			"to": [ 10, 2, 10 ],
 			"faces": {
-				"down": { "uv": [ 6, 2, 10, 6 ], "texture": "#inside" },
-				"up": { "uv": [ 6, 2, 10, 6 ], "texture": "#inside" },
+				"down": { "uv": [ 6, 2, 10, 6 ], "texture": "#inside", "cullface": "down" },
 				"north": { "uv": [ 6, 0, 10, 2 ], "texture": "#inside" },
 				"south": { "uv": [ 6, 0, 10, 2 ], "texture": "#inside" },
 				"west": { "uv": [ 6, 0, 10, 2 ], "texture": "#inside" },

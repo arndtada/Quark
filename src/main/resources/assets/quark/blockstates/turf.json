@@ -1,5 +1,10 @@
 {
 	"variants": {
-		"normal": { "model": "quark:turf" }
+		"": [
+			{ "model": "quark:block/turf" },
+			{ "model": "quark:block/turf", "y": 90 },
+			{ "model": "quark:block/turf", "y": 180 },
+			{ "model": "quark:block/turf", "y": 270 }
+		]
 	}
 }

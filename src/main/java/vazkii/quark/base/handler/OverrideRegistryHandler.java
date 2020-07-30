@@ -10,52 +10,43 @@
  */
 package vazkii.quark.base.handler;
 
-import com.google.common.collect.BiMap;
-import net.minecraft.block.Block;
-import net.minecraft.init.Biomes;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
-import net.minecraftforge.fml.common.FMLLog;
-import net.minecraftforge.registries.GameData;
-import net.minecraftforge.registries.IForgeRegistryEntry;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.core.Logger;
-import vazkii.arl.util.ProxyRegistry;
-import vazkii.quark.base.Quark;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.Map;
+
+import javax.annotation.Nullable;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Items;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
+import net.minecraftforge.registries.ForgeRegistryEntry;
+import net.minecraftforge.registries.GameData;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+import vazkii.arl.util.RegistryHelper;
+import vazkii.quark.base.Quark;
 
 public final class OverrideRegistryHandler {
-
-	public static void crackFinalField(Field field) throws NoSuchFieldException, IllegalAccessException {
-		field.setAccessible(true);
-
-		Field modifiersField = Field.class.getDeclaredField("modifiers");
-		modifiersField.setAccessible(true);
-		modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+	
+	public static void registerBlock(Block block, String baseName, @Nullable ItemGroup group) {
+		register(block, Blocks.class, baseName);
+		registerBlockItem(block, group);
 	}
 
-	private static Level revokeLog() {
-		Level prior = FMLLog.log.getLevel();
-		if (FMLLog.log instanceof Logger)
-			((Logger) FMLLog.log).setLevel(Level.OFF);
-		return prior;
-	}
-
-	private static void restoreLog(Level level) {
-		if (FMLLog.log instanceof Logger)
-			((Logger) FMLLog.log).setLevel(level);
+	private static void registerBlockItem(Block block, @Nullable ItemGroup group) {
+		Item.Properties props = new Item.Properties();
+		if(group != null)
+			props = props.group(group);
+		
+		BlockItem item = new BlockItem(block, props);
+		registerItem(item, block.getRegistryName().getPath());
 	}
 	
-	public static void registerBlock(Block block, String baseName) {
-		register(block, Blocks.class, baseName);
-	}
-
 	public static void registerItem(Item item, String baseName) {
 		register(item, Items.class, baseName);
 	}
@@ -64,31 +55,35 @@ public final class OverrideRegistryHandler {
 		register(item, Biomes.class, baseName);
 	}
 
-	public static <T extends IForgeRegistryEntry<T>> void register(T obj, Class<?> registryType, String baseName) {
-		Level revoked = revokeLog();
+	public static <T extends ForgeRegistryEntry<T>> void register(T obj, Class<?> registryType, String baseName) {
 		ResourceLocation regName = new ResourceLocation("minecraft", baseName);
-		obj.setRegistryName(regName);
-		restoreLog(revoked);
+		try {
+			Field field = ForgeRegistryEntry.class.getDeclaredField("registryName");
+			field.setAccessible(true);
+			field.set(obj, regName);
+		} catch (IllegalAccessException | NoSuchFieldException e) {
+			obj.setRegistryName(regName);
+		}
 
-		ProxyRegistry.register(obj);
+		RegistryHelper.register(obj);
 
 		for (Field declared : registryType.getDeclaredFields()) {
-			if (Modifier.isStatic(declared.getModifiers()) && declared.getType().isAssignableFrom(obj.getClass())) {
+			if (Modifier.isStatic(declared.getModifiers()) && obj.getClass().isAssignableFrom(declared.getType())) {
 				try {
-					IForgeRegistryEntry.Impl fieldVal = (IForgeRegistryEntry.Impl) declared.get(null);
+					IForgeRegistryEntry fieldVal = (IForgeRegistryEntry) declared.get(null);
 					if (regName.equals(fieldVal.getRegistryName())) {
 						if (obj instanceof Block && fieldVal instanceof Block) {
-							BiMap<Block, Item> itemMap = GameData.getBlockItemMap();
-							itemMap.forcePut((Block) obj, itemMap.get(fieldVal));
-						} else if (obj instanceof ItemBlock) {
-							BiMap<Block, Item> itemMap = GameData.getBlockItemMap();
-							itemMap.forcePut(((ItemBlock) obj).getBlock(), (Item) obj);
+							Map<Block, Item> itemMap = GameData.getBlockItemMap();
+							itemMap.put((Block) obj, itemMap.get(fieldVal));
+						} else if (obj instanceof BlockItem) {
+							Map<Block, Item> itemMap = GameData.getBlockItemMap();
+							itemMap.put(((BlockItem) obj).getBlock(), (Item) obj);
 						}
-
-						crackFinalField(declared);
-						declared.set(null, obj);
+						
+						Quark.LOG.info("Overriding " + registryType + "." + declared + " with " + obj);
+						MiscUtil.editFinalField(declared, null, obj);
 					}
-				} catch (IllegalAccessException | NoSuchFieldException e) {
+				} catch (IllegalAccessException e) {
 					Quark.LOG.warn("Was unable to replace registry entry for " + regName + ", may cause issues", e);
 				}
 			}

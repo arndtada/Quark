@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "quark:glowshroom" }
+		"": { "model": "quark:block/glowshroom" }
 	}
 }

@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "quark:glowcelium" }
+		"": { "model": "quark:block/glowcelium" }
 	}
 }

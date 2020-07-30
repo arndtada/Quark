@@ -1,5 +1,5 @@
 {
-	"variants": {
-		"normal": { "model": "quark:gravisand" }
-	}
+    "variants": {
+        "":  { "model": "quark:block/gravisand" }
+    }
 }

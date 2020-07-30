@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "quark:magma_bricks" }
+		"": { "model": "quark:block/magma_bricks" }
 	}
 }

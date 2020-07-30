@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "quark:rope" }
+		"": { "model": "quark:block/rope" }
 	}
 }

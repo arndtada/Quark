@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:block/wall_side",
-	"textures": {
-		"wall": "quark:blocks/stone_jasper"
-	}
+    "parent": "block/template_wall_side",
+    "textures": {
+        "wall": "quark:block/jasper"
+    }
 }
